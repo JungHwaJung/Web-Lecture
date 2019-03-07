@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>setInterval</title>
+  <style>
+		div {
+      display : inline-block;
+			width : 6em;
+      border : 1px solid green;
+			background-color : aliceblue;
+		}
+	</style>
+	<script>
+    var timerID = null;
+		function time() {
+			var clock = document.getElementById("clock");
+			timeout(clock);
+      timerID = setInterval("timeout(clock)", 1000);
+		}
+		function timeout(obj) {
+			var now = new Date();
+			obj.innerHTML = now.toLocaleTimeString()
+		}
+    function stop() {
+      if(timerID == null) {
+        timeout(clock);
+        timerID = setInterval("timeout(clock)", 1000);
+        clock.style.color = "black";
+      }
+      else {
+        clearInterval(timerID);
+        timerID = null;
+        clock.style.color = "lightgray";
+      }
+    }
+	</script>
+</head>
+<body onload="time()">
+  <h3>div 태그에 시계 만들기</h3>
+  <hr>
+  <div id="clock" onclick="stop()"></div>
+</body>
+</html>
